@@ -19,10 +19,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (config('app.app_path')) {
-            $this->app->bind('path.public', function () {
-                return config('app.app_path'); // Use the environment variable
-            });
-        }
+        //
     }
 }
