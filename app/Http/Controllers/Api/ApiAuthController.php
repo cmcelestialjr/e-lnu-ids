@@ -12,6 +12,10 @@ use Carbon\Carbon;
 
 class ApiAuthController extends Controller
 {
+    public function login1(Request $request)
+    {
+        return 'gsagsa';
+    }
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [

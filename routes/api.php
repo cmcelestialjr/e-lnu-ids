@@ -28,6 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/upload-file', [ApiUploadFileController::class, 'upload']);
 
 Route::post('/login', [ApiAuthController::class, 'login'])->name('login');
+Route::get('/login1', [ApiAuthController::class, 'login1'])->name('login1');
 
 Route::group(['middleware' => [VerifyAppToken::class]], function(){
     
