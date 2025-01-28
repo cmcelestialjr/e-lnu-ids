@@ -38,53 +38,53 @@ class ApiAuthController extends Controller
         $username = $request->username;
         $password = $request->password;
         #$password = $this->decryptPassword($request->password);
-        return response()->json(['username' => $apiKey], 200);
-        // $credentials = ['username' => $username, 'password' => $password];
-        // #return response()->json(['error' => $password], 401);
-        // if (Auth::attempt($credentials)) {
-        //     $user = User::where('username',$username)->first();
-        //     $user->tokens()->delete();
-        //     $token = $user->createToken(
-        //         'LNU-IDS-APP', ['*'], Carbon::now()->addDay(),
-        //     )->plainTextToken;
+        //return response()->json(['username' => $apiKey], 200);
+        $credentials = ['username' => $username, 'password' => $password];
+        #return response()->json(['error' => $password], 401);
+        if (Auth::attempt($credentials)) {
+            $user = User::where('username',$username)->first();
+            $user->tokens()->delete();
+            $token = $user->createToken(
+                'LNU-IDS-APP', ['*'], Carbon::now()->addDay(),
+            )->plainTextToken;
             
-        //     $user1 = User::find($user->id);
-        //     $user1->api_token = $token;
-        //     $user1->save();
+            $user1 = User::find($user->id);
+            $user1->api_token = $token;
+            $user1->save();
 
-        //     $role = 0;
+            $role = 0;
 
-        //     $user_systems = UsersNavigation::select('system')
-        //         ->where('user_id',$user->id)
-        //         ->where('nav',"")
-        //         ->where('nav_sub',"")
-        //         ->whereIn('system',['SIMS','HRIMS','FIS','DTS'])
-        //         ->get();
-        //     $systems = [];
-        //     if($user_systems->count()>0){
-        //         foreach($user_systems as $row){
-        //             if (!in_array($row->system, $systems)) {
-        //                 $systems[] = $row->system;
-        //             }
-        //         }
-        //     }
+            $user_systems = UsersNavigation::select('system')
+                ->where('user_id',$user->id)
+                ->where('nav',"")
+                ->where('nav_sub',"")
+                ->whereIn('system',['SIMS','HRIMS','FIS','DTS'])
+                ->get();
+            $systems = [];
+            if($user_systems->count()>0){
+                foreach($user_systems as $row){
+                    if (!in_array($row->system, $systems)) {
+                        $systems[] = $row->system;
+                    }
+                }
+            }
 
-        //     return response()->json([
-        //         'username' => $user->username,
-        //         'role' => $role,
-        //         'id_no' => $user->id_no,
-        //         'stud_id' => $user->stud_id,
-        //         'lastname' => $user->lastname,
-        //         'firstname' => $user->firstname,
-        //         'middlename' => $user->middlename,
-        //         'extname' => $user->extname,
-        //         'token' => $token,
-        //         'systems' => $systems
-        //     ], 200);
+            return response()->json([
+                'username' => $user->username,
+                'role' => $role,
+                'id_no' => $user->id_no,
+                'stud_id' => $user->stud_id,
+                'lastname' => $user->lastname,
+                'firstname' => $user->firstname,
+                'middlename' => $user->middlename,
+                'extname' => $user->extname,
+                'token' => $token,
+                'systems' => $systems
+            ], 200);
 
-        // } else {
-        //     return response()->json(['error' => 'Invalid Username and Password'], 401);
-        // }
+        } else {
+            return response()->json(['error' => 'Invalid Username and Password'], 401);
+        }
     }
 
     public function decryptPassword($encryptedData) {
