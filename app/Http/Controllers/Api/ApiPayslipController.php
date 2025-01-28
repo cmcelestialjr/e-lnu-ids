@@ -20,7 +20,7 @@ class ApiPayslipController extends Controller
             'option' => 'required|string',
         ]);
 
-        $pdf_error = $this->convertPdfToBase64('assets\pdf\pdf_error.pdf');        
+        $pdf_error = $this->convertPdfToBase64('eids\assets\pdf\pdf_error.pdf');        
         
         if ($validator->fails()) {
             return response()->json(['error' => 'Invalid data',
@@ -34,7 +34,7 @@ class ApiPayslipController extends Controller
                 'src' => ''], 200);
         }
 
-        $pdf_no_data = $this->convertPdfToBase64('assets\pdf\no-data-found.pdf');
+        $pdf_no_data = $this->convertPdfToBase64('eids\assets\pdf\no-data-found.pdf');
 
         $user_id = $user->id;
         $id_no = $user->id_no;
@@ -57,7 +57,7 @@ class ApiPayslipController extends Controller
         }
 
         if($payroll->count()>1){
-            $src = "storage\Payslip/$year/$id_no.'_merge.pdf";
+            $src = "eids\storage\Payslip/$year/$id_no.'_merge.pdf";
             $oMerger = PDFMerger::init();
             foreach($payroll as $row){
                 $oMerger->addPDF(public_path($row->path), 'all','L');
