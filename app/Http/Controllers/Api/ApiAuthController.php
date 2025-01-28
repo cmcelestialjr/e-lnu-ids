@@ -19,21 +19,21 @@ class ApiAuthController extends Controller
     }
     public function login(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        //     'username' => 'required|string',
-        //     'password' => 'required|string',
-        // ]);
+        $validator = Validator::make($request->all(), [
+            'username' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-        // if ($validator->fails()) {
-        //     return response()->json(['error' => 'Invalid data'], 400);
-        // }        
+        if ($validator->fails()) {
+            return response()->json(['error' => 'Invalid data'], 400);
+        }
         
         $apiToken = $request->header('App-Token');
         $apiKey = config('app.api_key');
 
-        // if ($apiToken !== $apiKey) {
-        //     return response()->json(['error' => 'Unauthorized'], 401);
-        // }
+        if ($apiToken !== $apiKey) {
+            return response()->json(['error' => 'Unauthorized'], 401);
+        }
 
         $username = $request->username;
         $password = $request->password;
