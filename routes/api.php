@@ -29,7 +29,7 @@ Route::post('/upload-file', [ApiUploadFileController::class, 'upload']);
 
 Route::post('/login', [ApiAuthController::class, 'login'])->name('login');
 Route::get('/login1', [ApiAuthController::class, 'login1'])->name('login1');
-Route::post('/fetchPayslip', [ApiPayslipController::class, 'fetch'])->name('fetchPayslip');
+Route::get('/fetchPayslip', [ApiPayslipController::class, 'fetch'])->name('fetchPayslip');
 Route::group(['middleware' => [VerifyAppToken::class]], function(){
 
     Route::group(['middleware' => ['auth:sanctum']], function () {
