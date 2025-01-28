@@ -31,10 +31,10 @@ Route::post('/login', [ApiAuthController::class, 'login'])->name('login');
 Route::get('/login1', [ApiAuthController::class, 'login1'])->name('login1');
 
 Route::group(['middleware' => [VerifyAppToken::class]], function(){
-    Route::post('/fetchPayslip', [ApiPayslipController::class, 'fetch'])->name('fetchPayslip');
+
     Route::group(['middleware' => ['auth:sanctum']], function () {
         Route::post('/fetchDtr', [ApiDtrController::class, 'fetchDtr'])->name('fetchDtr');
-        
+        Route::post('/fetchPayslip', [ApiPayslipController::class, 'fetch'])->name('fetchPayslip');
         Route::post('/fetchDeduction', [ApiDeductionController::class, 'fetch'])->name('fetchDeduction');
         Route::post('/fetchDeductionData', [ApiDeductionController::class, 'fetchData'])->name('fetchDeductionData');
         
