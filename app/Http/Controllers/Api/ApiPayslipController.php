@@ -76,6 +76,8 @@ class ApiPayslipController extends Controller
 
         $pdf = $this->convertPdfToBase64($src);
 
+        $pdf = $this->convertPdfToBase64('assets/pdf/no-data-found.pdf');
+
         return response()->json(['result' => 'success',
                     'src' => $pdf], 200);
     }
