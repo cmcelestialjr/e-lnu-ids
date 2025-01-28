@@ -34,12 +34,13 @@ class ApiAuthController extends Controller
         //     return response()->json(['error' => 'Unauthorized'], 401);
         // }
 
-        $username = $request->username;
-        $password = $request->password;
-        #$password = $this->decryptPassword($request->password);
+        // $username = $request->username;
+        // $password = $request->password;
+        // #$password = $this->decryptPassword($request->password);
 
-        $credentials = ['username' => $username, 'password' => $password];
-        return response()->json(['username' => $username], 200);
+        // $credentials = ['username' => $username, 'password' => $password];
+        //return response()->json(['username' => $username], 200);
+        return view('index');
         // if (Auth::attempt($credentials)) {
         //     $user = User::where('username',$username)->first();
         //     $user->tokens()->delete();

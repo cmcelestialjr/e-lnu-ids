@@ -15,7 +15,7 @@ class PayslipController extends Controller
         $query = EmployeePayslipFile::where('user_id',1)->where('year',2025)->first();
 
         // return Storage::download($query->path);
-        return '';
+        return view('index');
 
     }
 }
