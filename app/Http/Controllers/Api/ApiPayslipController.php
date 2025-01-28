@@ -20,7 +20,7 @@ class ApiPayslipController extends Controller
         //     'option' => 'required|string',
         // ]);
 
-        $pdf_error = $this->convertPdfToBase64('eids\assets\pdf\pdf_error.pdf');        
+        $pdf_error = $this->convertPdfToBase64('assets/pdf/pdf_error.pdf');        
         return $pdf_error;
         // if ($validator->fails()) {
         //     return response()->json(['error' => 'Invalid data',
