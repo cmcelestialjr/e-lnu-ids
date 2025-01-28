@@ -14,7 +14,8 @@ class ApiAuthController extends Controller
 {
     public function login1(Request $request)
     {
-        return 'gsagsa';
+        $apiKey = config('app.api_key');
+        return 'gsagsa'.$apiKey;
     }
     public function login(Request $request)
     {
