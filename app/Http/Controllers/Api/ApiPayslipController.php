@@ -56,24 +56,24 @@ class ApiPayslipController extends Controller
                 'src' => $pdf_no_data], 200);
         }
 
-        // if($payroll->count()>1){
-        //     $src = "storage/Payslip/$year/$id_no.'_merge.pdf";
-        //     $oMerger = PDFMerger::init();
-        //     foreach($payroll as $row){
-        //         $oMerger->addPDF(public_path($row->path), 'all','L');
-        //     }
-        //     $oMerger->merge();
-        //     $oMerger->save($src);
-        // }else{
-        //     foreach($payroll as $row){
-        //         $src = $row->path;
-        //     }
-        // }
+        if($payroll->count()>1){
+            $src = "storage/Payslip/$year/$id_no.'_merge.pdf";
+            $oMerger = PDFMerger::init();
+            foreach($payroll as $row){
+                $oMerger->addPDF(public_path($row->path), 'all','L');
+            }
+            $oMerger->merge();
+            $oMerger->save($src);
+        }else{
+            foreach($payroll as $row){
+                $src = $row->path;
+            }
+        }
 
-        //$pdf = $this->convertPdfToBase64($src);
+        $pdf = $this->convertPdfToBase64($src);
 
         return response()->json(['result' => 'success',
-                    'src' => $pdf_no_data], 200);
+                    'src' => $pdf], 200);
     }
     private function convertPdfToBase64($file){
         $pdfPath = public_path($file);

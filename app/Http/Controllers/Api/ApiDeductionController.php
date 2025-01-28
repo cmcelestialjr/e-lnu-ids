@@ -32,14 +32,14 @@ class ApiDeductionController extends Controller
         
         $data = EmployeeDeduction::where('user_id',$user_id)
             ->where('year',$year)
-            ->get();
+            ->orderBy('deduction_name')
+            ->groupBy('deduction_id', 'deduction_name')
+            ->get(['deduction_id','deduction_name']);
 
-        $responseData = $data->groupBy(function ($row) {
-                return $row->deduction_id . '-' . $row->deduction_name;
-        })->map(function ($group) {
+        $responseData = $data->map(function ($row) {
             return [
-                'deduction_name' => $group->first()->deduction_name,
-                'deduction_id' => $group->first()->deduction_id
+                'deduction_name' => $row->deduction_name,
+                'deduction_id' => $row->deduction_id
             ];
         });
 
