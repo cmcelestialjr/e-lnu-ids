@@ -39,7 +39,7 @@ class ApiAuthController extends Controller
         #$password = $this->decryptPassword($request->password);
 
         $credentials = ['username' => $username, 'password' => $password];
-        return response()->json(['error' => $username], 401);
+        return response()->json(['username' => $username], 200);
         // if (Auth::attempt($credentials)) {
         //     $user = User::where('username',$username)->first();
         //     $user->tokens()->delete();
