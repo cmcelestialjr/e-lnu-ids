@@ -29,7 +29,7 @@ class ApiAuthController extends Controller
         // }        
         
         $apiToken = $request->header('App-Token');
-        //$apiKey = config('app.api_key');
+        $apiKey = config('app.api_key');
 
         // if ($apiToken !== $apiKey) {
         //     return response()->json(['error' => 'Unauthorized'], 401);
@@ -38,7 +38,7 @@ class ApiAuthController extends Controller
         $username = $request->username;
         $password = $request->password;
         #$password = $this->decryptPassword($request->password);
-        return response()->json(['username' => $apiToken], 200);
+        return response()->json(['username' => $apiKey], 200);
         // $credentials = ['username' => $username, 'password' => $password];
         // #return response()->json(['error' => $password], 401);
         // if (Auth::attempt($credentials)) {
