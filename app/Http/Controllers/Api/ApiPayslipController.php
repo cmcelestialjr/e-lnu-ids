@@ -53,7 +53,7 @@ class ApiPayslipController extends Controller
 
         if($payroll->count()<=0){
             return response()->json(['result' => 'No available payslip',
-                'src' => ''], 200);
+                'src' => $pdf_no_data], 200);
         }
 
         // if($payroll->count()>1){
@@ -71,10 +71,9 @@ class ApiPayslipController extends Controller
         // }
 
         //$pdf = $this->convertPdfToBase64($src);
-        $pdf = 'gasgsa';
 
         return response()->json(['result' => 'success',
-                    'src' => $pdf], 200);
+                    'src' => $pdf_no_data], 200);
     }
     private function convertPdfToBase64($file){
         $pdfPath = public_path($file);
