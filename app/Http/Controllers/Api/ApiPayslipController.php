@@ -70,11 +70,11 @@ class ApiPayslipController extends Controller
         //     }
         // }
 
-        foreach($payroll as $row){
-            $src = $row->path;
-        }
+        // foreach($payroll as $row){
+        //     $src = $row->path;
+        // }
 
-        $pdf = $this->convertPdfToBase64($src);
+        // $pdf = $this->convertPdfToBase64($src);
 
         $pdf = $this->convertPdfToBase64('assets/pdf/no-data-found.pdf');
 
