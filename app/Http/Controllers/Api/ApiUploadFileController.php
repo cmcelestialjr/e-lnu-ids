@@ -17,10 +17,11 @@ class ApiUploadFileController extends Controller
 
         $file = $request->file('file');
         $id = $request->header('id');
+        $id_no = $request->header('id_no');
         $year = $request->header('year');
         $month = $request->header('month');
 
-        $path = $file->storeAs("Payslip/$year", $id.$month.$file->getClientOriginalName(), 'public');
+        $path = $file->storeAs("Payslip/$year", $id_no.$month.$file->getClientOriginalName(), 'public');
 
         $url = Storage::url($path);
 
